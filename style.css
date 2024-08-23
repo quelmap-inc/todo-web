@@ -168,6 +168,10 @@ button:hover {
     background-color: blue;
 }
 
+.footer{
+    margin-top: 30px;
+}
+
 @media (min-width: 768px) {
     body {
         flex-direction: row;
