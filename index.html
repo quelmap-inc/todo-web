@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sidebar">
+        <h2>プロジェクト</h2>
+        <ul id="project-list"></ul>
+        <button onclick="showAddProjectForm()">新規プロジェクト</button>
+    </div>
+
+    <div id="main-content">
+        <h1 id="current-project-name"></h1>
+        <div id="kanban-board">
+            <div class="column" id="todo">
+                <h2>計画</h2>
+                <div class="task-list" id="todo-tasks"></div>
+                <button onclick="showAddTaskForm('todo')">タスクを追加</button>
+            </div>
+            <div class="column" id="doing">
+                <h2>作業中</h2>
+                <div class="task-list" id="doing-tasks"></div>
+            </div>
+            <div class="column" id="done">
+                <h2>完了</h2>
+                <div class="task-list" id="done-tasks"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-task-form" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>新しいタスクを追加</h3>
+            <input type="text" id="task-title" placeholder="タスクのタイトル">
+            <input type="date" id="task-deadline">
+            <select id="task-dependency">
+                <option value="">依存タスクなし</option>
+            </select>
+            <select id="task-member">
+                <option value="">メンバーを選択</option>
+                <option value="red">🔴 赤</option>
+                <option value="blue">🔵 青</option>
+            </select>
+            <button onclick="addTask()">追加</button>
+            <button onclick="hideAddTaskForm()">キャンセル</button>
+        </div>
+    </div>
+
+    <div id="edit-task-form" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>タスクを編集</h3>
+            <input type="text" id="edit-task-title" placeholder="タスクのタイトル">
+            <input type="date" id="edit-task-deadline">
+            <select id="edit-task-dependency">
+                <option value="">依存タスクなし</option>
+            </select>
+            <select id="edit-task-member">
+                <option value="">メンバーを選択</option>
+                <option value="red">🔴 赤</option>
+                <option value="blue">🔵 青</option>
+            </select>
+            <button onclick="updateTask()">更新</button>
+            <button onclick="hideEditTaskForm()">キャンセル</button>
+            <button onclick="deleteTask()">タスクを削除</button>
+        </div>
+    </div>
+
+    <div id="add-project-form" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>新しいプロジェクトを追加</h3>
+            <input type="text" id="project-name" placeholder="プロジェクト名">
+            <button onclick="addProject()">追加</button>
+            <button onclick="hideAddProjectForm()">キャンセル</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
