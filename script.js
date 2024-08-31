@@ -50,7 +50,7 @@ function selectProject(projectId) {
 
 // タスクの取得と表示
 function getTasks(projectId) {
-    database.ref(`tasks/${projectId}`).on('value', (snapshot) => {
+    database.ref(`tasks/${projectId}`).orderByChild('deadline').on('value', (snapshot) => {
         const tasks = snapshot.val();
         displayTasks(tasks);
     });
