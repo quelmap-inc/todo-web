@@ -85,11 +85,13 @@ function createTaskElement(id, task) {
     const remainingDays = getRemainingDays(task.deadline);
     const dependencyTask = task.dependency ? getTaskById(task.dependency) : null;
     const isDependencyCompleted = dependencyTask ? dependencyTask.status === 'done' : true;
+    const discription = task.discription ? task.discription : '';
 
     const memberIcon = task.member ? `<span class="member-icon ${task.member}"></span>` : '';
 
     taskEl.innerHTML = `
         <h3>${task.title} ${memberIcon}</h3>
+        <p>説明: ${discription}</p>
         <p>期限: ${remainingDays}</p>
         <p>依存タスク: ${dependencyTask ? dependencyTask.title : 'なし'}</p>
         <button class="edit-button" onclick="showEditTaskForm('${id}')">編集</button>
@@ -176,6 +178,7 @@ function addTask() {
     const dependency = document.getElementById('task-dependency').value;
     const member = document.getElementById('task-member').value;
     const status = document.getElementById('add-task-form').dataset.status;
+    const discription = document.getElementById('task-discription').value;
 
     if (title && currentProject) {
         const newTaskRef = database.ref(`tasks/${currentProject}`).push();
@@ -184,6 +187,7 @@ function addTask() {
             deadline: deadline,
             dependency: dependency,
             member: member,
+            discription: discription,
             status: status
         });
 
@@ -191,6 +195,7 @@ function addTask() {
         document.getElementById('task-deadline').value = '';
         document.getElementById('task-dependency').value = '';
         document.getElementById('task-member').value = '';
+        document.getElementById('task-discription').value = '';
         hideAddTaskForm();
     }
 }
@@ -205,6 +210,7 @@ function showEditTaskForm(taskId) {
         document.getElementById('edit-task-title').value = task.title;
         document.getElementById('edit-task-deadline').value = task.deadline;
         document.getElementById('edit-task-dependency').value = task.dependency;
+        document.getElementById('edit-task-discription').value = task.discription
         document.getElementById('edit-task-member').value = task.member;
     });
 }
@@ -219,6 +225,7 @@ function updateTask() {
     const taskId = document.getElementById('edit-task-form').dataset.taskId;
     const title = document.getElementById('edit-task-title').value;
     const deadline = document.getElementById('edit-task-deadline').value;
+    const discription = document.getElementById('edit-task-discription').value;
     const dependency = document.getElementById('edit-task-dependency').value;
     const member = document.getElementById('edit-task-member').value;
 
@@ -226,6 +233,7 @@ function updateTask() {
         database.ref(`tasks/${currentProject}/${taskId}`).update({
             title: title,
             deadline: deadline,
+            discription: discription,
             dependency: dependency,
             member: member
         });
