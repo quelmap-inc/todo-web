@@ -146,6 +146,7 @@ function updateDependencyOptions() {
             const tasks = snapshot.val();
             if (tasks) {
                 for (let id in tasks) {
+                    if(tasks[id].status=="done"){break;}
                     const option = document.createElement('option');
                     const editOption = document.createElement('option');
                     option.value = id;
