@@ -91,8 +91,8 @@ function createTaskElement(id, task) {
 
     taskEl.innerHTML = `
         <h3>${task.title} ${memberIcon}</h3>
-        ${discription ? `<p>説明: ${discription}</p>` : ''}
-        <h5>期限: ${remainingDays}</h5>
+        ${discription ? `</br><span>説明: ${discription}</span></br>` : ''}
+        <p>期限: ${remainingDays}</p>
         <p>依存タスク: ${dependencyTask ? dependencyTask.title : 'なし'}</p>
         <button class="edit-button" onclick="showEditTaskForm('${id}')">編集</button>
     `;
